@@ -1,0 +1,213 @@
+/*
+ * IFRSmart design tokens — "Liquid Glass Financial Command Center".
+ * Every colour, space, radius, shadow and motion value used by the app is
+ * defined here. Components use the semantic tokens, never raw values.
+ */
+
+:root {
+  /* ---------------------------------------------------------- palette */
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --sky-400: #38bdf8;
+  --sky-100: #e0f2fe;
+  --sky-50: #f0f9ff;
+  --slate-50: #f8fafc;
+  --slate-200: #e2e8f0;
+  --slate-500: #64748b;
+  --slate-900: #0f172a;
+  --white: #ffffff;
+
+  /* ------------------------------------------------------- typography */
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-numeric: var(--font-sans);
+
+  --text-display: 600 clamp(2rem, 1.4rem + 2.4vw, 3rem) / 1.1 var(--font-sans);
+  --text-h1: 600 clamp(1.5rem, 1.25rem + 1vw, 1.875rem) / 1.2 var(--font-sans);
+  --text-h2: 600 1.25rem / 1.3 var(--font-sans);
+  --text-h3: 600 1.0625rem / 1.35 var(--font-sans);
+  --text-body: 400 0.9375rem / 1.55 var(--font-sans);
+  --text-body-sm: 400 0.875rem / 1.5 var(--font-sans);
+  --text-caption: 500 0.75rem / 1.4 var(--font-sans);
+  --text-number-lg: 600 clamp(1.5rem, 1.2rem + 1.2vw, 2rem) / 1.15 var(--font-numeric);
+  --text-number: 600 1.125rem / 1.3 var(--font-numeric);
+
+  --tracking-tight: -0.02em;
+  --tracking-caps: 0.06em;
+
+  /* ---------------------------------------------------------- spacing */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --page-gutter: clamp(16px, 2.5vw, 32px);
+  --content-max: 1440px;
+
+  /* ----------------------------------------------------------- radius */
+  --radius-hero: 40px;
+  --radius-card: 28px;
+  --radius-card-sm: 20px;
+  --radius-control: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  /* ----------------------------------------------------------- motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration: 200ms;
+  --duration-slow: 320ms;
+
+  /* ----------------------------------------------------------- layout */
+  --sidebar-width: 256px;
+  --sidebar-collapsed: 76px;
+  --header-height: 64px;
+  --mobile-nav-height: 68px;
+
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+}
+
+/* ============================================================ light theme */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --color-background: var(--slate-50);
+  --color-surface: var(--white);
+  --color-surface-muted: #f1f5f9;
+  --color-surface-sunken: #eef2f7;
+  --color-surface-glass: rgba(255, 255, 255, 0.62);
+  --color-surface-glass-strong: rgba(255, 255, 255, 0.82);
+  --color-glass-border: rgba(255, 255, 255, 0.7);
+  --color-glass-highlight: rgba(255, 255, 255, 0.9);
+
+  --color-text-primary: var(--slate-900);
+  --color-text-secondary: var(--slate-500);
+  --color-text-tertiary: #94a3b8;
+  --color-text-on-primary: var(--white);
+
+  --color-border: var(--slate-200);
+  --color-border-strong: #cbd5e1;
+  --color-divider: rgba(15, 23, 42, 0.06);
+
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-primary-soft: var(--sky-100);
+  --color-primary-softer: var(--sky-50);
+  --color-accent: var(--sky-400);
+  --color-focus: rgba(37, 99, 235, 0.35);
+
+  --color-success: #15803d;
+  --color-success-soft: #ecfdf3;
+  --color-warning: #b45309;
+  --color-warning-soft: #fffbeb;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fef2f2;
+  --color-danger-solid: #dc2626;
+  --color-info: var(--blue-700);
+  --color-info-soft: var(--sky-50);
+  --color-neutral: #475569;
+  --color-neutral-soft: #f1f5f9;
+
+  /* Financial semantics (restrained) */
+  --color-positive: #15803d;
+  --color-negative: #b91c1c;
+
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 2px 6px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.07);
+  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08), 0 24px 64px rgba(15, 23, 42, 0.12);
+  --shadow-glass: 0 1px 0 inset var(--color-glass-highlight), 0 8px 32px rgba(30, 64, 175, 0.08);
+
+  --glass-blur: saturate(160%) blur(20px);
+  --backdrop: rgba(15, 23, 42, 0.28);
+
+  --atmosphere:
+    radial-gradient(900px 520px at 12% -8%, rgba(56, 189, 248, 0.16), transparent 60%),
+    radial-gradient(760px 480px at 100% 0%, rgba(37, 99, 235, 0.1), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%, rgba(224, 242, 254, 0.7), transparent 70%);
+
+  --skeleton-base: #eef2f7;
+  --skeleton-shine: rgba(255, 255, 255, 0.75);
+}
+
+/* ============================================================= dark theme */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-background: #0b1120;
+  --color-surface: #111a2e;
+  --color-surface-muted: #16213a;
+  --color-surface-sunken: #0d1526;
+  --color-surface-glass: rgba(22, 33, 58, 0.58);
+  --color-surface-glass-strong: rgba(22, 33, 58, 0.82);
+  --color-glass-border: rgba(148, 163, 184, 0.16);
+  --color-glass-highlight: rgba(255, 255, 255, 0.06);
+
+  --color-text-primary: #e8eef9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-text-on-primary: #ffffff;
+
+  --color-border: rgba(148, 163, 184, 0.16);
+  --color-border-strong: rgba(148, 163, 184, 0.28);
+  --color-divider: rgba(148, 163, 184, 0.1);
+
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+  --color-primary-soft: rgba(59, 130, 246, 0.16);
+  --color-primary-softer: rgba(59, 130, 246, 0.08);
+  --color-accent: var(--sky-400);
+  --color-focus: rgba(96, 165, 250, 0.45);
+
+  --color-success: #4ade80;
+  --color-success-soft: rgba(74, 222, 128, 0.12);
+  --color-warning: #fbbf24;
+  --color-warning-soft: rgba(251, 191, 36, 0.12);
+  --color-danger: #f87171;
+  --color-danger-soft: rgba(248, 113, 113, 0.12);
+  --color-danger-solid: #dc2626;
+  --color-info: #7dd3fc;
+  --color-info-soft: rgba(125, 211, 252, 0.1);
+  --color-neutral: #cbd5e1;
+  --color-neutral-soft: rgba(148, 163, 184, 0.12);
+
+  --color-positive: #4ade80;
+  --color-negative: #f87171;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35), 0 24px 64px rgba(0, 0, 0, 0.45);
+  --shadow-glass: 0 1px 0 inset var(--color-glass-highlight), 0 12px 40px rgba(0, 0, 0, 0.35);
+
+  --glass-blur: saturate(140%) blur(22px);
+  --backdrop: rgba(2, 6, 23, 0.6);
+
+  --atmosphere:
+    radial-gradient(900px 520px at 10% -10%, rgba(56, 189, 248, 0.1), transparent 60%),
+    radial-gradient(760px 520px at 100% 0%, rgba(37, 99, 235, 0.14), transparent 62%),
+    radial-gradient(1000px 600px at 50% 120%, rgba(30, 64, 175, 0.16), transparent 70%);
+
+  --skeleton-base: #16213a;
+  --skeleton-shine: rgba(148, 163, 184, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration: 0ms;
+    --duration-slow: 0ms;
+  }
+}

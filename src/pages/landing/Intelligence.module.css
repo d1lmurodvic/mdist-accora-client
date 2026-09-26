@@ -1,0 +1,149 @@
+/* -------------------------------------------------------------- chain */
+.chain {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  margin: calc(-1 * var(--space-6)) 0 var(--space-12);
+  padding: 0;
+}
+.chainStep {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 44px;
+  padding: 0 var(--space-5) 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-surface-glass-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-glass);
+  font: 600 0.9375rem / 1 var(--font-sans);
+}
+.chainStep:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: calc(-1 * var(--space-3));
+  top: 50%;
+  width: var(--space-3);
+  height: 2px;
+  background: var(--color-primary);
+  opacity: 0.35;
+}
+.chainStep:last-child { color: #fff; background: linear-gradient(135deg, var(--color-accent), var(--color-primary)); border-color: transparent; }
+.chainIndex {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+.chainStep:last-child .chainIndex { color: var(--color-primary); background: #fff; }
+
+/* -------------------------------------------------------------- cards */
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-5); }
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--card-accent, var(--color-primary));
+}
+.insight { --card-accent: var(--color-primary); }
+.anomaly { --card-accent: var(--color-warning); }
+.forecast { --card-accent: var(--color-accent); }
+.health { --card-accent: var(--color-success); }
+
+.cardHead { display: flex; align-items: center; gap: var(--space-2); }
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  color: var(--card-accent);
+  background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+}
+.cardKind { flex: 1; font: var(--text-caption); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); }
+.cardTitle { font: var(--text-h3); }
+.cardText { font: var(--text-body-sm); color: var(--color-text-secondary); }
+.spark { width: 100%; height: 48px; }
+.signals { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.signals li { padding: 4px 10px; border-radius: var(--radius-pill); background: var(--color-surface-muted); font: var(--text-caption); color: var(--color-text-secondary); }
+.method { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: var(--space-3); border-top: 1px solid var(--color-divider); font: var(--text-caption); color: var(--color-text-secondary); }
+
+@media (max-width: 1023px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .chain { flex-direction: column; align-items: stretch; max-width: 320px; margin-left: auto; margin-right: auto; }
+  .chainStep:not(:last-child)::after { right: auto; left: 22px; top: 100%; width: 2px; height: var(--space-3); }
+}
+
+/* ----------------------------------------------------------------- AI */
+.ai { display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr); gap: clamp(var(--space-8), 4vw, var(--space-12)); align-items: start; }
+.aiPanel {
+  position: sticky;
+  top: 96px;
+  padding: var(--space-8);
+  border-radius: var(--radius-hero);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-surface-glass-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-glass), var(--shadow-md);
+}
+.aiPanelLabel { font: var(--text-h3); margin-bottom: var(--space-5); }
+.methods { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.methods li { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }
+.methods li:last-child { border-bottom: 0; padding-bottom: 0; }
+.methods span:last-child { font: var(--text-body-sm); color: var(--color-text-secondary); }
+
+.aiPoints { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
+.aiPoint { display: flex; flex-direction: column; gap: var(--space-3); }
+.aiIcon { color: var(--color-primary); }
+.aiTitle { font: var(--text-h3); margin-bottom: var(--space-2); }
+.aiText { font: var(--text-body-sm); color: var(--color-text-secondary); }
+
+@media (max-width: 899px) {
+  .ai { grid-template-columns: minmax(0, 1fr); }
+  .aiPanel { position: static; padding: var(--space-6); border-radius: var(--radius-card); }
+}
+@media (max-width: 559px) { .aiPoints { grid-template-columns: minmax(0, 1fr); } }
+
+/* ----------------------------------------------------------- principles */
+.principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-4); }
+.principle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-card-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: left;
+}
+.principle svg { color: var(--color-primary); margin-bottom: var(--space-2); }
+.principle h3 { font: var(--text-h3); }
+.principle p { font: var(--text-body-sm); color: var(--color-text-secondary); }
+
+@media (max-width: 1023px) { .principles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 399px) { .principles { grid-template-columns: minmax(0, 1fr); } }

@@ -1,0 +1,8 @@
+.brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--color-text-primary); }
+.brand:hover { text-decoration: none; }
+.mark { width: 32px; height: 32px; flex: none; filter: drop-shadow(0 4px 10px rgba(37, 99, 235, 0.3)); }
+.word { font: 700 1.125rem / 1 var(--font-sans); letter-spacing: -0.03em; white-space: nowrap; }
+.accent { color: var(--color-primary); }
+
+/* In the tablet icon rail only the mark fits. */
+@media (max-width: 1199px) { .railWord { display: none; } }

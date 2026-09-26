@@ -1,0 +1,30 @@
+.page { position: relative; min-height: 100dvh; overflow-x: clip; }
+
+/* Smooth in-page navigation, except for reduced-motion users. */
+:global(html:has(.page)) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  :global(html:has(.page)) { scroll-behavior: auto; }
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1100px;
+  background:
+    radial-gradient(900px 600px at 78% 8%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 65%),
+    radial-gradient(760px 520px at 8% 0%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 62%);
+  pointer-events: none;
+}
+
+.skip {
+  position: fixed;
+  left: 16px;
+  top: -60px;
+  z-index: var(--z-toast);
+  padding: 10px 16px;
+  border-radius: var(--radius-control);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+.skip:focus { top: 16px; }

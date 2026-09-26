@@ -1,0 +1,60 @@
+/* Line items editor */
+.lines { display: flex; flex-direction: column; gap: var(--space-3); }
+.linesHead,
+.line { display: grid; grid-template-columns: minmax(0, 2.4fr) 90px minmax(0, 1.3fr) 96px 40px; gap: var(--space-2); align-items: start; }
+.linesHead { font: var(--text-caption); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: var(--tracking-caps); padding: 0 2px; }
+.line input { height: 42px; }
+.lineError { grid-column: 1 / -1; font: var(--text-caption); font-weight: 400; color: var(--color-danger); margin-top: -4px; }
+.rate { position: relative; }
+.rate input { padding-right: 28px; }
+.rate span { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: var(--text-caption); color: var(--color-text-tertiary); pointer-events: none; }
+.addLine { align-self: flex-start; }
+.totalsNote {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--color-primary-softer);
+  color: var(--color-text-secondary);
+  font: var(--text-caption);
+  font-weight: 400;
+}
+.totalsNote svg { color: var(--color-primary); flex: none; }
+
+@media (max-width: 639px) {
+  .linesHead { display: none; }
+  .line {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: var(--space-3);
+    border-radius: var(--radius-control);
+    border: 1px solid var(--color-border);
+  }
+  .line > :first-child { grid-column: 1 / -1; }
+  .line > :last-child { justify-self: end; grid-column: 2; }
+}
+
+/* Invoice details */
+.head { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-5); }
+.headRow { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; }
+.amounts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-card-sm);
+  background: var(--color-surface-muted);
+}
+.amounts dt { font: var(--text-caption); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+.amounts dd { margin: 4px 0 0; }
+.itemTable { width: 100%; border-collapse: collapse; margin-bottom: var(--space-5); font: var(--text-body-sm); }
+.itemTable th { text-align: left; padding: var(--space-2) var(--space-2) var(--space-2) 0; font: var(--text-caption); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: var(--tracking-caps); border-bottom: 1px solid var(--color-border); }
+.itemTable td { padding: var(--space-3) var(--space-2) var(--space-3) 0; border-bottom: 1px solid var(--color-divider); vertical-align: top; }
+.itemTable .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sectionTitle { font: var(--text-h3); margin: var(--space-2) 0 var(--space-3); }
+.overdue { color: var(--color-danger); font-weight: 600; }
+.paymentBox { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--space-5); padding: var(--space-4); border-radius: var(--radius-card-sm); border: 1px solid color-mix(in srgb, var(--color-success) 30%, transparent); background: var(--color-success-soft); font: var(--text-body-sm); }
+.paymentBox strong { color: var(--color-success); }
+.payTotal { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-card-sm); background: var(--color-surface-muted); }
+.inlineAdd { margin-top: 6px; padding: 0; border: 0; background: none; color: var(--color-primary); font: var(--text-caption); font-weight: 600; cursor: pointer; text-align: left; }

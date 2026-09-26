@@ -1,0 +1,7 @@
+.form { display: flex; flex-direction: column; gap: var(--space-5); }
+.switch { margin-top: var(--space-6); text-align: center; font: var(--text-body-sm); color: var(--color-text-secondary); }
+
+.password { position: relative; }
+.password input { padding-right: 48px; }
+.reveal { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+.reveal:active:not(:disabled) { transform: translateY(-50%) scale(0.96); }

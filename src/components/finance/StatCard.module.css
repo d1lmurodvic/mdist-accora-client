@@ -1,0 +1,21 @@
+.card { display: flex; flex-direction: column; gap: var(--space-4); }
+.footer { padding-top: var(--space-4); border-top: 1px solid var(--color-divider); font: var(--text-body-sm); color: var(--color-text-secondary); }
+
+.link {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+/* The whole card is the target for pointer users. */
+.link::after { content: ''; position: absolute; inset: -400px; }
+.card:hover .link { color: var(--color-primary); background: var(--color-primary-soft); }
+.link:hover { text-decoration: none; }
+.card { overflow: hidden; }
