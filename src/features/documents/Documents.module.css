@@ -25,7 +25,7 @@
 }
 .dropTitle { font: var(--text-h3); margin: 0; }
 .dropHint { font: var(--text-caption); font-weight: 400; color: var(--color-text-secondary); margin: 0; }
-.dropAction { margin-top: var(--space-2); }
+.uploadActions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin: var(--space-2) 0; }
 
 .queue { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
 .queueItem {
@@ -115,6 +115,13 @@
 }
 @media (max-width: 479px) {
   .drop { padding: var(--space-6) var(--space-4); }
+  .uploadActions { width: 100%; }
+  .uploadActions > button { flex: 1 1 100%; }
+  .queueItem { flex-wrap: wrap; }
+  .queueState { flex-wrap: wrap; }
   .field { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
 }
 .capabilityGap { height: var(--space-6); }
+
+.cameraPreview { margin-top: var(--space-4); border-radius: var(--radius-card-sm); overflow: hidden; background: #111; }
+.cameraPreview video, .cameraPreview img { display: block; width: 100%; max-height: 55vh; min-height: 180px; object-fit: contain; }

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { LandingNav } from './LandingNav.jsx';
 import { Hero } from './Hero.jsx';
 import { Capabilities, HowItWorks, ProblemSolution, Reports } from './Story.jsx';
-import { AiSection, IntelligenceSection, Principles } from './Intelligence.jsx';
+import { AiSection } from './Intelligence.jsx';
 import { ClosingCta, Footer } from './Closing.jsx';
 import styles from './Landing.module.css';
 
@@ -13,8 +13,8 @@ import styles from './Landing.module.css';
  */
 export default function Landing() {
   useEffect(() => {
-    document.title = 'IFRSmart — From transactions to financial decisions';
-    return () => { document.title = 'IFRSmart'; };
+    document.title = 'Accora — Invoice and receipt processing';
+    return () => { document.title = 'Accora'; };
   }, []);
 
   return (
@@ -28,9 +28,7 @@ export default function Landing() {
         <HowItWorks />
         <Capabilities />
         <Reports />
-        <IntelligenceSection />
         <AiSection />
-        <Principles />
         <ClosingCta />
       </main>
       <Footer />

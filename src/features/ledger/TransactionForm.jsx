@@ -209,7 +209,7 @@ export function TransactionForm({
         <Field
           label="Category"
           error={errors.categoryId}
-          hint={categoryChanged ? 'IFRSmart will remember this choice for this payee.' : !form.categoryId ? 'Leave empty to let your rules suggest one for review.' : undefined}
+          hint={categoryChanged ? 'Accora will remember this choice for this payee.' : !form.categoryId ? 'Leave empty to let your rules suggest one for review.' : undefined}
         >
           {(props) => (
             <CategorySelect categories={categories} type={form.type} includeEmpty={!editing} emptyLabel="Suggest from my rules" value={form.categoryId} onChange={set('categoryId')} {...props} />

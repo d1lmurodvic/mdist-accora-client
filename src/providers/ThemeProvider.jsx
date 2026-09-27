@@ -3,7 +3,7 @@ import { local } from '../lib/storage.js';
 
 /** Light, dark or follow the system. An explicit choice is remembered. */
 const ThemeContext = createContext(null);
-const KEY = 'ifrsmart.theme';
+const KEY = 'accora.theme';
 const MODES = ['light', 'dark', 'system'];
 
 function systemPrefersDark() {

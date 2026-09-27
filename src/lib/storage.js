@@ -26,7 +26,7 @@ function safe(storageName) {
 export const local = safe('localStorage');
 const session = safe('sessionStorage');
 
-const TOKEN_KEY = 'ifrsmart.session';
+const TOKEN_KEY = 'accora.session';
 let memoryToken = session.get(TOKEN_KEY);
 
 export const tokenStore = {

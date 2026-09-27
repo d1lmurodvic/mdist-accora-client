@@ -10,7 +10,7 @@ import styles from './LandingNav.module.css';
 export const LANDING_LINKS = [
   { href: '#product', label: 'Product' },
   { href: '#how', label: 'How it works' },
-  { href: '#intelligence', label: 'Intelligence' },
+  { href: '#ai', label: 'Documents' },
   { href: '#reports', label: 'Reports' },
 ];
 
@@ -50,7 +50,7 @@ export function LandingNav() {
         </div>
       </nav>
 
-      <Drawer open={open} onClose={() => setOpen(false)} title="IFRSmart">
+      <Drawer open={open} onClose={() => setOpen(false)} title="Accora">
         <ul className={styles.mobileLinks}>
           {LANDING_LINKS.map((link) => (
             <li key={link.href}><a href={link.href} onClick={() => setOpen(false)}>{link.label}</a></li>

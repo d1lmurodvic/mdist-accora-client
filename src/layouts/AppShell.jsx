@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
-  Bell, Check, ChevronsLeft, ChevronsRight, LogOut, Monitor, Moon, MoreHorizontal, Search, Sun, User,
+  Check, ChevronsLeft, ChevronsRight, LogOut, Monitor, Moon, MoreHorizontal, Sun,
 } from 'lucide-react';
 import { useAuth } from '../providers/AuthProvider.jsx';
 import { useTheme } from '../providers/ThemeProvider.jsx';
@@ -12,12 +12,11 @@ import { Avatar } from '../components/ui/Page.jsx';
 import { Badge } from '../components/ui/Badge.jsx';
 import { PageSkeleton } from '../components/ui/Feedback.jsx';
 import { local } from '../lib/storage.js';
-import { useUnreadCount } from '../features/dashboard/api.js';
 import { MOBILE_PRIMARY, NAV_GROUPS, NAV_ITEMS, titleFor } from './navigation.js';
 import { Brand } from './Brand.jsx';
 import styles from './AppShell.module.css';
 
-const COLLAPSE_KEY = 'ifrsmart.sidebar';
+const COLLAPSE_KEY = 'accora.sidebar';
 
 /**
  * The signed-in application frame: sidebar (desktop), compact rail (tablet),
@@ -104,11 +103,9 @@ export function AppShell({ preview = false, children }) {
 
 function Header({ preview }) {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const auth = useAuth();
   const { mode, setMode } = useTheme();
   const user = preview ? { name: 'Preview', email: 'Development gallery' } : auth.user;
-  const unread = useUnreadCount({ enabled: !preview && auth.status === 'ready' }).data ?? 0;
   const ThemeIcon = mode === 'dark' ? Moon : mode === 'light' ? Sun : Monitor;
   const themeItem = (id, label, icon) => ({ label, icon: mode === id ? Check : icon, checked: mode === id, onSelect: () => setMode(id) });
 
@@ -120,16 +117,11 @@ function Header({ preview }) {
         {auth.company && !preview && <span className={styles.company}>{auth.company.name}</span>}
       </div>
       <div className={styles.headerEnd}>
-        <IconButton icon={Search} label="Search (coming soon)" disabled className={styles.hideSm} />
         <Dropdown
           trigger={<IconButton icon={ThemeIcon} label="Theme" />}
           width={200}
           items={[{ heading: 'Appearance' }, themeItem('light', 'Light', Sun), themeItem('dark', 'Dark', Moon), themeItem('system', 'System', Monitor)]}
         />
-        <NavLink to="/app/notifications" className={styles.iconLink} aria-label={unread ? `Notifications, ${unread} unread` : 'Notifications'} title="Notifications">
-          <Bell size={18} aria-hidden="true" />
-          {unread > 0 && <span className={styles.unread} aria-hidden="true">{unread > 99 ? '99+' : unread}</span>}
-        </NavLink>
         <Dropdown
           width={240}
           header={user && (
@@ -145,8 +137,6 @@ function Header({ preview }) {
             </button>
           )}
           items={[
-            { label: 'Profile & settings', icon: User, onSelect: () => navigate('/app/settings') },
-            { separator: true },
             { label: 'Sign out', icon: LogOut, tone: 'danger', disabled: preview, onSelect: () => auth.signOut() },
           ]}
         />

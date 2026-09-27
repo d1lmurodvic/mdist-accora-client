@@ -25,7 +25,7 @@ function fromInvoice(invoice, type, prefill) {
   if (!invoice) {
     const issueDate = prefill?.issueDate ?? todayLocalIso();
     return {
-      type: prefill?.type ?? type, number: '', contactId: '', issueDate, dueDate: addDaysIso(issueDate, 30), notes: '',
+      type: prefill?.type ?? type, number: prefill?.number ?? '', contactId: '', issueDate, dueDate: prefill?.dueDate ?? addDaysIso(issueDate, 30), notes: '',
       lines: prefill?.lines?.length ? prefill.lines.map((line) => ({ ...emptyLine(), ...line })) : [emptyLine()],
     };
   }
@@ -50,7 +50,7 @@ function parseLines(lines, currency) {
     const price = parseMoneyInput(line.unitPrice, currency);
     const rate = parseRateInput(line.taxRate);
     const quantity = /^\d+$/.test(line.quantity.trim()) ? Number(line.quantity.trim()) : NaN;
-    const problem = !line.description.trim() ? 'Describe the item.'
+    const problem = line.taxRateRequired && !line.taxRate.trim() ? 'Check the tax rate from the document. Enter 0 if no tax applies.' : !line.description.trim() ? 'Describe the item.'
       : !(quantity >= 1 && quantity <= 1_000_000) ? 'Quantity must be a whole number from 1 to 1,000,000.'
         : price.error ? `Unit price: ${price.error}` : rate.error ? `Tax: ${rate.error}` : null;
     if (problem) errors[line.key] = problem;
@@ -120,7 +120,7 @@ export function InvoiceForm({ invoice, defaultType = 'receivable', currency, onC
     if (!editing) body.type = form.type;
     save.mutate({ id: invoice?.id, body }, {
       onSuccess: (response) => {
-        toast.success(editing ? 'Invoice updated' : 'Draft invoice created', 'Totals were calculated by IFRSmart.');
+        toast.success(editing ? 'Invoice updated' : 'Draft invoice created', 'Totals were calculated by Accora.');
         onSaved?.(response.data);
         onClose();
       },
@@ -198,7 +198,7 @@ export function InvoiceForm({ invoice, defaultType = 'receivable', currency, onC
             <Button variant="ghost" size="sm" icon={Plus} className={styles.addLine} disabled={form.lines.length >= MAX_LINES} onClick={() => setForm((c) => ({ ...c, lines: [...c.lines, emptyLine()] }))}>Add item</Button>
           </div>
 
-          <p className={styles.totalsNote}><Calculator size={15} aria-hidden="true" /> Line totals, tax and the invoice total are calculated by IFRSmart when you save — tax per line, rounded half away from zero. Tax rates are your inputs, not tax advice.</p>
+          <p className={styles.totalsNote}><Calculator size={15} aria-hidden="true" /> Line totals, tax and the invoice total are calculated by Accora when you save — tax per line, rounded half away from zero. Tax rates are your inputs, not tax advice.</p>
           <Field label="Notes">{(p) => <Textarea rows={2} maxLength={2000} value={form.notes} onChange={set('notes')} {...p} />}</Field>
         </form>
       </Modal>

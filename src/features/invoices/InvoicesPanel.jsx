@@ -93,7 +93,7 @@ export function InvoicesPanel({ onOpen, onCreate }) {
           : <EmptyState icon={FileText} title="No invoices yet" description="Bill a customer, or record a bill from a vendor. Unpaid invoices appear on your dashboard; they count as income or expense only when paid." action={<Button icon={Plus} onClick={onCreate}>New invoice</Button>} />}
       />
       <Pagination meta={list.data?.meta} onPageChange={setPage} />
-      <p className={`${ledger.muted} ${ledger.note}`}>Overdue means sent and past its due date — it is worked out by IFRSmart, never set by hand.</p>
+      <p className={`${ledger.muted} ${ledger.note}`}>Overdue means sent and past its due date — it is worked out by Accora, never set by hand.</p>
     </>
   );
 }

@@ -10,7 +10,6 @@ const Login = lazy(() => import('../pages/public/Login.jsx'));
 const Register = lazy(() => import('../pages/public/Register.jsx'));
 const Onboarding = lazy(() => import('../pages/public/Onboarding.jsx'));
 const Landing = lazy(() => import('../pages/landing/Landing.jsx'));
-const Section = lazy(() => import('../pages/app/Section.jsx'));
 const Dashboard = lazy(() => import('../pages/app/Dashboard.jsx'));
 const Transactions = lazy(() => import('../pages/app/Transactions.jsx'));
 const Invoices = lazy(() => import('../pages/app/Invoices.jsx'));
@@ -18,8 +17,6 @@ const Reports = lazy(() => import('../pages/app/Reports.jsx'));
 const Documents = lazy(() => import('../pages/app/Documents.jsx'));
 const DocumentReview = lazy(() => import('../pages/app/DocumentReview.jsx'));
 
-/** Each /app section; the screens themselves arrive in later phases. */
-const SECTIONS = ['intelligence', 'tax', 'accountant', 'notifications', 'settings'];
 
 // Development-only component gallery; the whole branch is removed from production builds.
 let devRoutes = [];
@@ -53,7 +50,6 @@ export const router = createBrowserRouter([
           { path: 'documents', element: <Documents /> },
           { path: 'reports', element: <Reports /> },
           { path: 'documents/:documentId', element: <DocumentReview /> },
-          ...SECTIONS.map((id) => ({ path: id, element: <Section id={id} /> })),
           { path: '*', element: <NotFound inShell /> },
         ],
       },

@@ -1,26 +1,22 @@
-import {
-  ArrowRight, Bot, FileScan, FileSpreadsheet, FileText, FolderSearch, HeartPulse, Inbox, LayoutDashboard, LineChart,
-  ListChecks, Receipt, Scale, ScanSearch, Sparkles, TrendingUp, Waves,
-} from 'lucide-react';
+import { ArrowRight, Camera, CheckCheck, FileScan, FileSpreadsheet, FileText, FolderSearch, LayoutDashboard, LineChart, ListChecks, Receipt, Scale, Tags, TrendingUp, Users, Waves } from 'lucide-react';
 import { Section } from './Section.jsx';
 import styles from './Story.module.css';
 
 const PROBLEMS = [
-  { icon: FolderSearch, text: 'Transactions scattered across bank statements, notes and spreadsheets' },
-  { icon: FileText, text: 'Invoices that are hard to follow from draft to paid' },
-  { icon: FileSpreadsheet, text: 'Reports that take time to prepare and longer to understand' },
-  { icon: Waves, text: 'Little visibility into where cash is heading' },
-  { icon: ScanSearch, text: 'Unusual or duplicate payments noticed too late' },
+  { icon: FolderSearch, text: 'Receipts spread across phones, inboxes and folders' },
+  { icon: FileText, text: 'Vendor details and invoice totals typed in by hand' },
+  { icon: Tags, text: 'Expenses waiting to be categorized' },
+  { icon: FileSpreadsheet, text: 'Financial reports waiting on unfinished paperwork' },
 ];
-const CHAIN = ['Transactions', 'Financial data', 'Reports', 'Intelligence', 'Forecast', 'Decision'];
+const CHAIN = ['Photo or upload', 'Extracted document details', 'Your review and approval', 'Saved transaction', 'Updated financial reports'];
 
 export function ProblemSolution() {
   return (
     <Section
       id="why"
-      eyebrow="Why IFRSmart"
-      title="Financial data is everywhere. Clarity is not."
-      lead="Owners of growing businesses have the numbers, but rarely the time to turn them into answers. IFRSmart brings them together — it supports your decisions and your accountant, it does not replace them."
+      eyebrow="Why Accora"
+      title="Less paperwork. A clearer financial picture."
+      lead="Accora helps small and mid-sized businesses turn invoices and receipts into organized financial data, with less manual entry."
     >
       <div className={styles.split}>
         <div className={styles.problem}>
@@ -33,7 +29,7 @@ export function ProblemSolution() {
         </div>
         <div className={styles.arrow} aria-hidden="true"><ArrowRight size={22} /></div>
         <div className={styles.solution}>
-          <p className={styles.sideLabel}>With IFRSmart</p>
+          <p className={styles.sideLabel}>With Accora</p>
           <ol className={styles.chain}>
             {CHAIN.map((step, index) => (
               <li key={step} style={{ '--i': index }}>
@@ -42,7 +38,7 @@ export function ProblemSolution() {
               </li>
             ))}
           </ol>
-          <p className={styles.solutionNote}>One ledger feeds every screen, so the dashboard, reports and forecast always agree.</p>
+          <p className={styles.solutionNote}>Review the extracted details and suggested category. After you approve, Accora saves a transaction and updates your company’s financial data.</p>
         </div>
       </div>
     </Section>
@@ -50,16 +46,16 @@ export function ProblemSolution() {
 }
 
 const STEPS = [
-  { icon: Inbox, title: 'Capture', text: 'Transactions, invoices and documents enter IFRSmart.' },
-  { icon: ListChecks, title: 'Organize', text: 'Activity is structured and categorized, with your corrections remembered.' },
-  { icon: LayoutDashboard, title: 'Understand', text: 'Reports, cash flow and financial health become visible.' },
-  { icon: TrendingUp, title: 'Predict', text: 'Forecasts and unusual-transaction checks surface what needs attention.' },
-  { icon: Sparkles, title: 'Decide', text: 'You act on clear, explained figures instead of guesses.' },
+  { icon: Camera, title: 'Capture', text: 'Take a photo of an invoice or receipt, or upload a document.' },
+  { icon: FileScan, title: 'Extract', text: 'Accora reads the vendor, date, amount, tax, currency, invoice number and line items.' },
+  { icon: ListChecks, title: 'Review', text: 'Check the extracted information and suggested category. Correct anything that needs attention.' },
+  { icon: CheckCheck, title: 'Approve', text: 'Approve the details to save the document as a transaction.' },
+  { icon: LayoutDashboard, title: 'Understand', text: 'Your financial data updates, helping you track spending and understand your business.' },
 ];
 
 export function HowItWorks() {
   return (
-    <Section id="how" eyebrow="How it works" title="Five steps from activity to action" tone="band">
+    <Section id="how" eyebrow="How it works" title="From a document to a transaction" tone="band">
       <ol className={styles.steps}>
         {STEPS.map((step, index) => (
           <li key={step.title} className={styles.step}>
@@ -75,12 +71,12 @@ export function HowItWorks() {
 }
 
 const CAPABILITIES = [
-  { icon: LayoutDashboard, title: 'Financial overview', text: 'Cash, income, expenses and net result for any period, with the change from the previous one.', wide: true },
-  { icon: Receipt, title: 'Transactions', text: 'Track, search and review activity. Rules and your own corrections suggest categories — you confirm.' },
-  { icon: FileText, title: 'Invoices', text: 'Receivables and payables from draft to paid. A payment becomes a real transaction.' },
-  { icon: FileScan, title: 'Documents', text: 'Upload receipts and invoices. Fields are read automatically when an AI provider is configured; otherwise you enter them in the same review flow.' },
-  { icon: HeartPulse, title: 'Financial health', text: 'Five transparent signals — cash, profitability, revenue, expenses, collection — with their thresholds.' },
-  { icon: Bot, title: 'Assistant', text: 'Ask about your cash, profit, invoices or forecast and get answers from your own figures, within stated limits.', wide: true },
+  { icon: FileScan, title: 'Invoice & receipt processing', text: 'Turn photos and uploads into structured financial data. Review extracted details and category suggestions before approving.', wide: true },
+  { icon: Receipt, title: 'Transactions', text: 'Track income and expenses in one place, with organized categories and records you can review.' },
+  { icon: FileText, title: 'Customer invoices', text: 'Create and manage customer invoices, follow due dates and track payments.' },
+  { icon: LineChart, title: 'Reports', text: 'Understand profit and loss, cash flow and expense breakdowns from your financial records.' },
+  { icon: TrendingUp, title: 'Forecast', text: 'See expected income, expenses and future cash balance, with the assumptions behind the projection.' },
+  { icon: Users, title: 'Accountant access', text: 'Planned: a simple way for your business and accountant to work with the same financial information.', wide: true },
 ];
 
 export function Capabilities() {
@@ -88,8 +84,8 @@ export function Capabilities() {
     <Section
       id="product"
       eyebrow="Product"
-      title="Everything a growing business needs to see"
-      lead="One workspace for the full financial picture — each capability states how its results are produced."
+      title="Start with a receipt. See the bigger picture."
+      lead="Document processing is the starting point. Transactions, invoices, reports and forecasts help you manage what comes next."
     >
       <div className={styles.capabilities}>
         {CAPABILITIES.map((item) => (
@@ -117,7 +113,7 @@ export function Reports() {
       id="reports"
       eyebrow="Reports"
       title="Statements you can actually read"
-      lead="Practical, owner-facing financial statements generated on demand from your records — not certified statutory filings."
+      lead="See how your business is doing with profit and loss, cash flow and expense breakdowns based on your records."
       align="start"
       tone="band"
     >

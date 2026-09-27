@@ -126,7 +126,7 @@ export default function UIGallery() {
       {tab === 'states' && (
         <div className={styles.grid2}>
           <Card><EmptyState title="No transactions yet" description="Record your first income or expense to see it here." action={<Button icon={Plus}>Add transaction</Button>} /></Card>
-          <Card><ErrorState error={new NetworkError('Could not reach the IFRSmart server.')} onRetry={() => {}} /></Card>
+          <Card><ErrorState error={new NetworkError('Could not reach the Accora server.')} onRetry={() => {}} /></Card>
           <CardSkeleton />
           <Card><div className={styles.center}><Spinner size={28} /></div></Card>
         </div>

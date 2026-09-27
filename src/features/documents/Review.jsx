@@ -7,7 +7,7 @@ import { Skeleton, Spinner } from '../../components/ui/Feedback.jsx';
 import { ConfidenceBadge, MoneyValue, StatusBadge } from '../../components/finance/Finance.jsx';
 import { describeError } from '../../lib/api/errors.js';
 import { formatDate } from '../../lib/format.js';
-import { minorToInput, rateToInput } from '../../lib/moneyInput.js';
+import { rateToInput } from '../../lib/moneyInput.js';
 import { STATUS_LABEL, useDocumentFile } from './api.js';
 import styles from './Documents.module.css';
 
@@ -72,14 +72,14 @@ export function FilePreview({ document: doc }) {
 }
 
 const FIELD_LABELS = {
-  documentType: 'Type', date: 'Date', vendor: 'Vendor', customer: 'Customer', subtotal: 'Subtotal', tax: 'Tax', total: 'Total', lineItems: 'Line items',
+  documentType: 'Type', invoiceNumber: 'Invoice number', date: 'Date', dueDate: 'Due date', currency: 'Currency', vendor: 'Vendor', customer: 'Customer', subtotal: 'Subtotal', tax: 'Tax', total: 'Total', lineItems: 'Line items',
 };
-const REVIEW_LABEL = { missing: 'Not found', low_confidence: 'Check this', currency_mismatch: 'Different currency' };
+const REVIEW_LABEL = { missing: 'Not found', low_confidence: 'Check this', currency_mismatch: 'Different currency', totals_mismatch: 'Subtotal and tax do not match total', invalid_date_order: 'Due date is before invoice date', incomplete_lines: 'Complete missing line details before saving', fractional_quantity: 'Invoice drafts require whole-number quantities; review these lines' };
 
 function FieldValue({ name, value }) {
   if (value === null || value === undefined) return <span className={styles.missing}>Not found</span>;
   if (name === 'documentType') return value === 'invoice' ? 'Invoice' : 'Receipt';
-  if (name === 'date') return formatDate(value);
+  if (name === 'date' || name === 'dueDate') return formatDate(value);
   if (['subtotal', 'tax', 'total'].includes(name)) return <MoneyValue money={value} size="sm" />;
   if (name === 'lineItems') {
     if (value.length === 0) return <span className={styles.missing}>None</span>;
@@ -89,9 +89,9 @@ function FieldValue({ name, value }) {
         <tbody>
           {value.map((line, index) => (
             <tr key={index}>
-              <td>{line.description}</td>
-              <td className={styles.num}>{line.quantity}</td>
-              <td className={styles.num}><MoneyValue money={line.unitPrice} size="sm" /></td>
+              <td>{line.description ?? 'Not found'}</td>
+              <td className={styles.num}>{line.quantity ?? 'Not found'}</td>
+              <td className={styles.num}><>{line.unitPrice ? <MoneyValue money={line.unitPrice} size="sm" /> : 'Not found'}</></td>
               <td className={styles.num}>{line.taxRate === null ? '—' : `${rateToInput(line.taxRate) || '0'}%`}</td>
             </tr>
           ))}
@@ -104,19 +104,23 @@ function FieldValue({ name, value }) {
 
 /** What was read, with the reader's own per-field confidence and review flags. */
 export function ExtractedFields({ extraction }) {
-  const flags = Object.fromEntries((extraction.needsReview ?? []).map((item) => [item.field, item.reason]));
+  const flags = (extraction.needsReview ?? []).reduce((result, item) => {
+    (result[item.field] ??= []).push(item);
+    return result;
+  }, {});
   return (
     <dl className={styles.fields}>
       {Object.keys(FIELD_LABELS).map((name) => {
         const field = extraction.fields[name] ?? { value: null, confidence: null };
-        const flag = flags[name];
+        const reasons = (flags[name] ?? []).map((item) => item.reason).filter((reason) => reason !== 'missing');
+        const flag = reasons.length > 0;
         return (
-          <div key={name} className={`${styles.field} ${flag && flag !== 'missing' ? styles.flagged : ''}`}>
+          <div key={name} className={`${styles.field} ${flag ? styles.flagged : ''}`}>
             <dt>{FIELD_LABELS[name]}</dt>
             <dd>
               <FieldValue name={name} value={field.value} />
               <ConfidenceBadge confidence={field.confidence} />
-              {flag && flag !== 'missing' && <Badge tone="warning">{REVIEW_LABEL[flag] ?? flag}</Badge>}
+              {reasons.map((reason) => <Badge key={reason} tone="warning">{REVIEW_LABEL[reason] ?? reason}</Badge>)}
             </dd>
           </div>
         );
@@ -125,41 +129,4 @@ export function ExtractedFields({ extraction }) {
   );
 }
 
-const value = (fields, name) => fields?.[name]?.value ?? null;
-
-/**
- * Starting values for the transaction form: read values copied as they are.
- * Money in another currency is left for the user to enter.
- */
-export function transactionPrefill(fields, currency) {
-  const prefill = {};
-  if (!fields) return prefill;
-  const total = value(fields, 'total');
-  if (total && total.currency === currency) prefill.amount = minorToInput(total.amount, currency);
-  if (value(fields, 'date')) prefill.date = value(fields, 'date');
-  if (value(fields, 'vendor')) prefill.payee = value(fields, 'vendor');
-  const lines = value(fields, 'lineItems');
-  if (lines?.length === 1) prefill.description = lines[0].description;
-  return prefill;
-}
-
-/** Starting values for the invoice form: a vendor on the document suggests a bill you owe. */
-export function invoicePrefill(fields, currency) {
-  if (!fields) return {};
-  const vendor = value(fields, 'vendor');
-  const customer = value(fields, 'customer');
-  const type = vendor ? 'payable' : customer ? 'receivable' : undefined;
-  const lines = value(fields, 'lineItems') ?? [];
-  const sameCurrency = lines.every((line) => line.unitPrice.currency === currency);
-  return {
-    type,
-    contactName: type === 'payable' ? vendor : type === 'receivable' ? customer : undefined,
-    issueDate: value(fields, 'date') ?? undefined,
-    lines: sameCurrency
-      ? lines.map((line) => ({
-        description: line.description, quantity: String(line.quantity),
-        unitPrice: minorToInput(line.unitPrice.amount, currency), taxRate: rateToInput(line.taxRate),
-      }))
-      : [],
-  };
-}
+export { invoicePrefill, transactionPrefill } from './prefill.js';

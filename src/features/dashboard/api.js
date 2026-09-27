@@ -1,4 +1,4 @@
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { api } from '../../lib/api/client.js';
 import { PERIOD_PRESETS } from '../../components/ui/DateRangeSelector.jsx';
@@ -28,48 +28,6 @@ export function usePeriodParam() {
     }, { replace: true });
   };
   return [value, setValue];
-}
-
-export function useDashboard(period) {
-  return useQuery({
-    queryKey: ['dashboard', period],
-    queryFn: async ({ signal }) => api.get('/dashboard', { query: period, signal }),
-    placeholderData: keepPreviousData,
-  });
-}
-
-/** The running cash balance for the period (day buckets, month for long ranges). */
-export function useCashFlow(period, { enabled }) {
-  return useQuery({
-    queryKey: ['cash-flow', period],
-    queryFn: async ({ signal }) => {
-      try {
-        return (await api.get('/financials/cash-flow', { query: { ...period, granularity: 'day' }, signal })).data;
-      } catch (error) {
-        // Periods over a year only allow month buckets.
-        if (error?.kind === 'unprocessable') return (await api.get('/financials/cash-flow', { query: { ...period, granularity: 'month' }, signal })).data;
-        throw error;
-      }
-    },
-    enabled,
-    placeholderData: keepPreviousData,
-  });
-}
-
-export function useActivity() {
-  return useQuery({
-    queryKey: ['dashboard', 'activity'],
-    queryFn: async ({ signal }) => (await api.get('/dashboard/activity', { query: { limit: 8 }, signal })).data,
-  });
-}
-
-export function useUnreadCount({ enabled = true } = {}) {
-  return useQuery({
-    queryKey: ['notifications', 'unread-count'],
-    queryFn: async ({ signal }) => (await api.get('/notifications/unread-count', { signal })).data.unreadCount,
-    enabled,
-    refetchInterval: 60_000,
-  });
 }
 
 /** Owner-only: load the labelled demo dataset into an empty workspace. */

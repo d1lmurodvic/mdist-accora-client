@@ -5,17 +5,11 @@
  */
 
 const ROUTES = [
-  ['/api/v1/financials/health', '/app/intelligence'],
   ['/api/v1/financials', '/app/reports'],
   ['/api/v1/reports', '/app/reports'],
-  ['/api/v1/ai', '/app/intelligence'],
-  ['/api/v1/forecast', '/app/intelligence'],
   ['/api/v1/invoices', '/app/invoices'],
   ['/api/v1/transactions', '/app/transactions'],
   ['/api/v1/documents', '/app/documents', true],
-  ['/api/v1/notifications', '/app/notifications'],
-  ['/api/v1/tax', '/app/tax'],
-  ['/api/v1/accountants', '/app/accountant'],
 ];
 
 export function appPathFor(apiLink) {

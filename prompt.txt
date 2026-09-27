@@ -1,0 +1,23 @@
+Accora is a financial management platform for small and mid-sized businesses.
+
+Its main focus is automating invoice and receipt processing.
+
+A user can take a photo of an invoice or receipt, or upload one. Accora reads the document, extracts important information like the vendor, date, amount, tax, currency, invoice number, and line items, then suggests a category. The user reviews the information and approves it. After approval, Accora saves it as a transaction and updates the company’s financial data.
+
+Accora also includes:
+
+Transactions — track income and expenses.
+
+Invoices — create and manage customer invoices.
+
+Reports — view profit and loss, cash flow, and expense breakdowns.
+
+Forecast — see expected income, expenses, and future cash balance.
+
+Accountant access — a simple way for businesses and accountants to work with the same financial information.
+
+The main idea is simple:
+
+Take a photo of a financial document → Accora understands it → turns it into structured financial data → helps the business understand its finances.
+
+Accora is not meant to feel like an AI chatbot. AI works quietly inside the product, mainly to reduce manual accounting work.

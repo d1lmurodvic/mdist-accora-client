@@ -1,4 +1,4 @@
-# IFRSmart — web application (`admin/`)
+# Accora — web application (`admin/`)
 
 React 19 + Vite. Talks to the backend only through `src/lib/api/client.js`.
 

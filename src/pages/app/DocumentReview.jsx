@@ -186,7 +186,7 @@ export default function DocumentReview() {
           prefill={invoicePrefill(fields, currency)}
           mutation={asInvoice}
           title="Draft invoice from document"
-          description="Saved as a draft. The invoice number is not read from documents — enter it."
+          description="Saved as a draft. Check the invoice number, due date and line details before saving."
           onClose={() => { setForm(null); asInvoice.reset(); }}
         />
       )}

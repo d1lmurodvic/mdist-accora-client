@@ -10,9 +10,9 @@ export function ClosingCta() {
     <section className={styles.ctaSection} aria-labelledby="cta-title">
       <div ref={ref} className={`${styles.cta} ${visible ? styles.visible : styles.hidden}`}>
         <div className={styles.ctaGlow} aria-hidden="true" />
-        <p className={styles.flow}>Transactions → Reports → Intelligence → Decisions</p>
-        <h2 id="cta-title" className={styles.ctaTitle}>Turn financial activity into financial clarity.</h2>
-        <p className={styles.ctaLead}>Create your workspace in a minute. Start with your own data, or explore a clearly labelled demo company first.</p>
+        <p className={styles.flow}>Photo → Review → Approve → Understand</p>
+        <h2 id="cta-title" className={styles.ctaTitle}>Put your paperwork to work.</h2>
+        <p className={styles.ctaLead}>Create your workspace and start with an invoice or receipt. You can also explore with sample data.</p>
         <div className={styles.ctaActions}>
           <Link to="/register" className={styles.primary}>Get started <ArrowRight size={18} aria-hidden="true" /></Link>
           <Link to="/register" className={styles.secondary}><FlaskConical size={17} aria-hidden="true" /> Explore with demo data</Link>
@@ -29,7 +29,7 @@ export function Footer() {
       <div className={styles.footerInner}>
         <div className={styles.footerBrand}>
           <Brand to="/" />
-          <p>An AI-assisted financial operating system for growing businesses: from transactions to financial decisions.</p>
+          <p>Financial management for small and mid-sized businesses. Turn invoices and receipts into organized records and clearer finances.</p>
         </div>
         <nav className={styles.footerNav} aria-label="Footer">
           <div>
@@ -37,7 +37,7 @@ export function Footer() {
             <ul>
               <li><a href="#product">Product</a></li>
               <li><a href="#reports">Reports</a></li>
-              <li><a href="#intelligence">Intelligence</a></li>
+              <li><a href="#ai">Document processing</a></li>
             </ul>
           </div>
           <div>
@@ -50,7 +50,7 @@ export function Footer() {
         </nav>
       </div>
       <div className={styles.footerBottom}>
-        <p>© {new Date().getFullYear()} IFRSmart</p>
+        <p>© {new Date().getFullYear()} Accora</p>
         <p>Practical owner-facing statements; not certified statutory filings or tax advice.</p>
       </div>
     </footer>

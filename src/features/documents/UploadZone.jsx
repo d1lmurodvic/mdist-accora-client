@@ -1,19 +1,21 @@
 import { useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, CircleAlert, UploadCloud } from 'lucide-react';
+import { Camera, CheckCircle2, CircleAlert, UploadCloud } from 'lucide-react';
 import { Button } from '../../components/ui/Button.jsx';
 import { Spinner } from '../../components/ui/Feedback.jsx';
 import { describeError } from '../../lib/api/errors.js';
 import { ACCEPT_ATTRIBUTE, precheckFile, useUploadDocument } from './api.js';
+import { CameraCapture } from './CameraCapture.jsx';
 import styles from './Documents.module.css';
 
 /**
- * Drag-and-drop or pick invoices and receipts. Files are sent one at a time
+ * Capture a photo, drag-and-drop or pick invoices and receipts. Files are sent one at a time
  * (POST /documents takes exactly one file); each shows its own outcome.
  */
 export function UploadZone() {
   const inputId = useId();
   const inputRef = useRef(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const upload = useUploadDocument();
   const [dragging, setDragging] = useState(false);
   const [queue, setQueue] = useState([]);
@@ -47,7 +49,7 @@ export function UploadZone() {
         onDrop={(e) => { e.preventDefault(); setDragging(false); onFiles(e.dataTransfer.files); }}
       >
         <span className={styles.dropIcon}><UploadCloud size={24} aria-hidden="true" /></span>
-        <p className={styles.dropTitle}>Drop invoices or receipts here</p>
+        <p className={styles.dropTitle}>Take a photo or upload a document</p>
         <p className={styles.dropHint}>PDF, JPEG, PNG, WebP, GIF or HEIC · up to 10 MB each</p>
         <input
           ref={inputRef}
@@ -55,11 +57,20 @@ export function UploadZone() {
           type="file"
           multiple
           accept={ACCEPT_ATTRIBUTE}
-          className="sr-only"
+          hidden
+          aria-label="Choose invoices or receipts"
           onChange={(e) => { onFiles(e.target.files); e.target.value = ''; }}
         />
-        <Button className={styles.dropAction} icon={UploadCloud} onClick={() => inputRef.current?.click()}>Choose files</Button>
+        <div className={styles.uploadActions}>
+          <Button icon={Camera} onClick={() => setCameraOpen(true)}>Take photo</Button>
+          <Button variant="secondary" icon={UploadCloud} onClick={() => inputRef.current?.click()}>Choose files</Button>
+        </div>
+        <p className={styles.dropHint}>Keep the whole document in frame and the text sharp. Your photo uploads when you accept it.</p>
+        <p className={styles.dropHint}>Use your camera, choose existing files, or drop files here.</p>
       </div>
+      {cameraOpen && <CameraCapture onClose={() => setCameraOpen(false)}
+        onCapture={(file) => { setCameraOpen(false); onFiles([file]); }}
+        onChooseFile={() => { setCameraOpen(false); inputRef.current?.click(); }} />}
       {queue.length > 0 && (
         <ul className={styles.queue} aria-live="polite" aria-label="Uploads">
           {queue.map((item) => (
