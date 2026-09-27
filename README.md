@@ -1,4 +1,4 @@
-# IFRSmart — web application (`admin/`)
+# Accora — web application (`admin/`)
 
 React 19 + Vite. Talks to the backend only through `src/lib/api/client.js`.
 
@@ -19,3 +19,12 @@ Start the backend first (`cd ../backend && npm start`). In development, `/dev/ui
 - `src/layouts` — app shell, navigation map, brand.
 - `src/providers` — theme, auth session (from `GET /auth/me`), toasts.
 - `src/routes` — router and session guards.
+
+## Deploy (Vercel)
+
+`vercel.json` builds with `npm run build`, serves `dist/` and rewrites every path to `index.html` (client-side routes).
+Set one environment variable in the Vercel project before building:
+
+- `VITE_API_BASE_URL` — the full API URL, e.g. `https://api.example.com/api/v1`.
+
+The backend must allow the Vercel origin in `CORS_ALLOWED_ORIGINS` (e.g. `https://accora.vercel.app`).

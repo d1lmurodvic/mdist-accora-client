@@ -5,11 +5,13 @@
  */
 
 const ROUTES = [
-  ['/api/v1/financials/health', '/app/intelligence'],
+  ['/api/v1/financials/health', '/app/intelligence?tab=health'],
   ['/api/v1/financials', '/app/reports'],
   ['/api/v1/reports', '/app/reports'],
+  ['/api/v1/ai/anomalies', '/app/intelligence?tab=anomalies'],
+  ['/api/v1/ai/assistant', '/app/intelligence?tab=assistant'],
   ['/api/v1/ai', '/app/intelligence'],
-  ['/api/v1/forecast', '/app/intelligence'],
+  ['/api/v1/forecast', '/app/intelligence?tab=forecast'],
   ['/api/v1/invoices', '/app/invoices'],
   ['/api/v1/transactions', '/app/transactions'],
   ['/api/v1/documents', '/app/documents', true],

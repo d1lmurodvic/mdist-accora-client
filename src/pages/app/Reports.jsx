@@ -41,7 +41,7 @@ export default function Reports() {
     <>
       <PageHeader
         title="Reports"
-        description="Your figures for any period and your financial statements, all calculated by IFRSmart from your transactions."
+        description="Your figures for any period and your financial statements, all calculated by Accora from your transactions."
       />
       <div className={styles.controls}>
         <Tabs tabs={TABS} value={tab} onChange={(id) => update({ tab: id === 'summary' ? null : id })} label="Reports" />

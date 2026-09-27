@@ -13,8 +13,8 @@ import styles from './Landing.module.css';
  */
 export default function Landing() {
   useEffect(() => {
-    document.title = 'IFRSmart — From transactions to financial decisions';
-    return () => { document.title = 'IFRSmart'; };
+    document.title = 'Accora — From transactions to financial decisions';
+    return () => { document.title = 'Accora'; };
   }, []);
 
   return (

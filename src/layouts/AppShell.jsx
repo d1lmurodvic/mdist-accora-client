@@ -17,7 +17,7 @@ import { MOBILE_PRIMARY, NAV_GROUPS, NAV_ITEMS, titleFor } from './navigation.js
 import { Brand } from './Brand.jsx';
 import styles from './AppShell.module.css';
 
-const COLLAPSE_KEY = 'ifrsmart.sidebar';
+const COLLAPSE_KEY = 'accora.sidebar';
 
 /**
  * The signed-in application frame: sidebar (desktop), compact rail (tablet),

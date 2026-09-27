@@ -74,7 +74,7 @@ export async function request(method, path, { query, body, formData, headers = {
     response = await fetch(buildUrl(path, query), init);
   } catch (error) {
     if (signal?.aborted) throw error;
-    throw new NetworkError(timeout.signal.aborted ? 'The server took too long to respond.' : 'Could not reach the IFRSmart server.');
+    throw new NetworkError(timeout.signal.aborted ? 'The server took too long to respond.' : 'Could not reach the Accora server.');
   } finally {
     clearTimeout(timer);
     signal?.removeEventListener('abort', abort);

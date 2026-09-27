@@ -46,5 +46,5 @@ export const NAV_ITEMS = NAV_GROUPS.flatMap((group) => group.items);
 export const MOBILE_PRIMARY = ['/app/dashboard', '/app/transactions', '/app/invoices', '/app/reports'];
 
 export function titleFor(pathname) {
-  return NAV_ITEMS.find((item) => pathname === item.to || pathname.startsWith(`${item.to}/`))?.label ?? 'IFRSmart';
+  return NAV_ITEMS.find((item) => pathname === item.to || pathname.startsWith(`${item.to}/`))?.label ?? 'Accora';
 }

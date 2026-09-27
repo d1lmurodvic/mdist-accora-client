@@ -8,6 +8,7 @@ import { ConfidenceBadge, MoneyValue, StatusBadge } from '../../components/finan
 import { describeError } from '../../lib/api/errors.js';
 import { formatDate } from '../../lib/format.js';
 import { minorToInput, rateToInput } from '../../lib/moneyInput.js';
+import { saveBlob } from '../../lib/download.js';
 import { STATUS_LABEL, useDocumentFile } from './api.js';
 import styles from './Documents.module.css';
 
@@ -27,18 +28,6 @@ export function DocumentStatus({ document }) {
 }
 
 const PREVIEWABLE_IMAGES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-
-/** Save a Blob under a name (no dependency). */
-export function saveBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 
 /** The original file, fetched through the authorised endpoint and shown from memory. */
 export function FilePreview({ document: doc }) {

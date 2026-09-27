@@ -290,7 +290,7 @@ export function RulesPanel({ query, categories, canManage }) {
   return (
     <>
       <div className={styles.toolbar}>
-        <p className={styles.muted}>Your rules are checked first, then corrections IFRSmart learned from you. No AI model is used.</p>
+        <p className={styles.muted}>Your rules are checked first, then corrections Accora learned from you. No AI model is used.</p>
         {canManage && <Button icon={Plus} onClick={() => setAdding(true)}>Add rule</Button>}
       </div>
       {!canManage && <OwnerOnly />}
@@ -301,7 +301,7 @@ export function RulesPanel({ query, categories, canManage }) {
         loading={query.isPending}
         error={query.isError ? query.error : null}
         onRetry={() => query.refetch()}
-        empty={<EmptyState icon={Tags} title="No rules yet" description="Add a rule, or correct a transaction's category — IFRSmart learns from your corrections." compact />}
+        empty={<EmptyState icon={Tags} title="No rules yet" description="Add a rule, or correct a transaction's category — Accora learns from your corrections." compact />}
       />
       {adding && <RuleForm categories={categories} onClose={() => setAdding(false)} />}
       <ConfirmDialog

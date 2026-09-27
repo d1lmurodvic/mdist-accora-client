@@ -61,7 +61,7 @@ export default function Login() {
         </Field>
         <Button type="submit" size="lg" fullWidth loading={login.isPending} iconEnd={ArrowRight}>Sign in</Button>
       </form>
-      <p className={styles.switch}>New to IFRSmart? <Link to="/register">Create an account</Link></p>
+      <p className={styles.switch}>New to Accora? <Link to="/register">Create an account</Link></p>
     </PublicPanel>
   );
 }

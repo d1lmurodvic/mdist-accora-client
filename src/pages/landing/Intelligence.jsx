@@ -14,7 +14,7 @@ export function IntelligenceSection() {
       id="intelligence"
       eyebrow="Financial intelligence"
       title="Your numbers should explain what is happening — not just record it."
-      lead="IFRSmart compares periods, watches for unusual activity and projects cash ahead, then tells you why each signal appeared and what it is based on."
+      lead="Accora compares periods, watches for unusual activity and projects cash ahead, then tells you why each signal appeared and what it is based on."
     >
       <ol className={styles.chain} aria-label="From data to decision">
         {CHAIN.map((step, index) => (
@@ -82,7 +82,7 @@ export function IntelligenceSection() {
 
 const AI_POINTS = [
   { icon: Calculator, title: 'Numbers come from the engine', text: 'Totals, balances, reports and forecasts are calculated exactly from your records. A language model never produces a figure.' },
-  { icon: FileScan, title: 'AI where language helps', text: 'Reading receipts and invoices uses an AI provider when one is configured. Without one, IFRSmart says so and you enter the details.' },
+  { icon: FileScan, title: 'AI where language helps', text: 'Reading receipts and invoices uses an AI provider when one is configured. Without one, Accora says so and you enter the details.' },
   { icon: Tags, title: 'Rules you can see', text: 'Categories are suggested from your rules and past corrections, labelled with how they were chosen, and always need your confirmation.' },
   { icon: MessagesSquare, title: 'Grounded answers', text: 'The assistant answers from your company’s own figures and says when a question is outside what it can answer.' },
 ];
@@ -93,7 +93,7 @@ export function AiSection() {
       id="ai"
       eyebrow="Our approach to AI"
       title="AI interprets. The math stays exact."
-      lead="Every result in IFRSmart shows how it was produced — rule, statistics or AI — so you always know what you are looking at."
+      lead="Every result in Accora shows how it was produced — rule, statistics or AI — so you always know what you are looking at."
       align="start"
       tone="band"
     >

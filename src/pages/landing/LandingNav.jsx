@@ -50,7 +50,7 @@ export function LandingNav() {
         </div>
       </nav>
 
-      <Drawer open={open} onClose={() => setOpen(false)} title="IFRSmart">
+      <Drawer open={open} onClose={() => setOpen(false)} title="Accora">
         <ul className={styles.mobileLinks}>
           {LANDING_LINKS.map((link) => (
             <li key={link.href}><a href={link.href} onClick={() => setOpen(false)}>{link.label}</a></li>

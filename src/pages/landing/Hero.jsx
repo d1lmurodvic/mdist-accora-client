@@ -6,7 +6,7 @@ import styles from './Hero.module.css';
 
 /*
  * The hero and its product illustration. The illustration reuses the real
- * IFRSmart components; every value in it is a labelled sample, not customer
+ * Accora components; every value in it is a labelled sample, not customer
  * data.
  */
 const sample = (amount) => ({ amount, currency: 'UZS' });
@@ -20,7 +20,7 @@ export function Hero() {
           From transactions to <span className={styles.accent}>financial decisions.</span>
         </h1>
         <p className={styles.lead}>
-          IFRSmart turns a growing business&apos;s everyday financial activity into clear reports, grounded insights and
+          Accora turns a growing business&apos;s everyday financial activity into clear reports, grounded insights and
           forward-looking forecasts — built for owners, not just accountants.
         </p>
         <div className={styles.ctas}>
@@ -40,7 +40,7 @@ export function Hero() {
 
 function HeroVisual() {
   return (
-    <div className={styles.visual} role="img" aria-label="Illustration of the IFRSmart dashboard with sample figures">
+    <div className={styles.visual} role="img" aria-label="Illustration of the Accora dashboard with sample figures">
       <div className={styles.glow} aria-hidden="true" />
       <div className={styles.panel} aria-hidden="true">
         <div className={styles.panelTop}>

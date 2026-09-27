@@ -18,9 +18,9 @@ export function ProblemSolution() {
   return (
     <Section
       id="why"
-      eyebrow="Why IFRSmart"
+      eyebrow="Why Accora"
       title="Financial data is everywhere. Clarity is not."
-      lead="Owners of growing businesses have the numbers, but rarely the time to turn them into answers. IFRSmart brings them together — it supports your decisions and your accountant, it does not replace them."
+      lead="Owners of growing businesses have the numbers, but rarely the time to turn them into answers. Accora brings them together — it supports your decisions and your accountant, it does not replace them."
     >
       <div className={styles.split}>
         <div className={styles.problem}>
@@ -33,7 +33,7 @@ export function ProblemSolution() {
         </div>
         <div className={styles.arrow} aria-hidden="true"><ArrowRight size={22} /></div>
         <div className={styles.solution}>
-          <p className={styles.sideLabel}>With IFRSmart</p>
+          <p className={styles.sideLabel}>With Accora</p>
           <ol className={styles.chain}>
             {CHAIN.map((step, index) => (
               <li key={step} style={{ '--i': index }}>
@@ -50,7 +50,7 @@ export function ProblemSolution() {
 }
 
 const STEPS = [
-  { icon: Inbox, title: 'Capture', text: 'Transactions, invoices and documents enter IFRSmart.' },
+  { icon: Inbox, title: 'Capture', text: 'Transactions, invoices and documents enter Accora.' },
   { icon: ListChecks, title: 'Organize', text: 'Activity is structured and categorized, with your corrections remembered.' },
   { icon: LayoutDashboard, title: 'Understand', text: 'Reports, cash flow and financial health become visible.' },
   { icon: TrendingUp, title: 'Predict', text: 'Forecasts and unusual-transaction checks surface what needs attention.' },

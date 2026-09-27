@@ -111,7 +111,7 @@ export default function Dashboard() {
           </div>
 
           <p className={styles.disclaimer}>
-            Changes compare with the previous period. Figures are calculated by IFRSmart from your records on a cash basis.
+            Changes compare with the previous period. Figures are calculated by Accora from your records on a cash basis.
           </p>
         </div>
       )}

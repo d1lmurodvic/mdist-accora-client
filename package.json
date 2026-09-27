@@ -1,9 +1,9 @@
 {
-  "name": "ifrsmart-admin",
+  "name": "accora-admin",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "IFRSmart web application (React + Vite).",
+  "description": "Accora web application (React + Vite).",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

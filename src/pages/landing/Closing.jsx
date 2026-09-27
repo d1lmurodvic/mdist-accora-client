@@ -50,7 +50,7 @@ export function Footer() {
         </nav>
       </div>
       <div className={styles.footerBottom}>
-        <p>© {new Date().getFullYear()} IFRSmart</p>
+        <p>© {new Date().getFullYear()} Accora</p>
         <p>Practical owner-facing statements; not certified statutory filings or tax advice.</p>
       </div>
     </footer>
