@@ -29,6 +29,16 @@ function useInvalidate(keys) {
   return () => Promise.all(keys.map((queryKey) => queryClient.invalidateQueries({ queryKey })));
 }
 
+/** Whether the server can read documents right now (GET /ai/capabilities) — stated, never assumed. */
+export function useReaderCapability() {
+  return useQuery({
+    queryKey: ['ai-capabilities'],
+    queryFn: async ({ signal }) => (await api.get('/ai/capabilities', { signal })).data,
+    staleTime: 5 * 60_000,
+    select: (data) => data?.capabilities?.find((c) => c.id === 'document_extraction') ?? null,
+  });
+}
+
 /** GET /documents (without extraction). Polls while any listed document is still being read. */
 export function useDocuments(query) {
   return useQuery({

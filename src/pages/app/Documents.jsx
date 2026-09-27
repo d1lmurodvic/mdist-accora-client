@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { ChevronRight, FileScan, Info } from 'lucide-react';
 import { PageHeader } from '../../components/ui/Page.jsx';
 import { Pill } from '../../components/ui/Badge.jsx';
 import { Select } from '../../components/ui/Field.jsx';
 import { DataTable, Pagination } from '../../components/ui/Table.jsx';
 import { EmptyState } from '../../components/ui/Feedback.jsx';
-import { api } from '../../lib/api/client.js';
 import { formatDate, formatRelativeTime } from '../../lib/format.js';
 import { UploadZone } from '../../features/documents/UploadZone.jsx';
 import { DocumentStatus } from '../../features/documents/Review.jsx';
-import { FILTER_LABEL, formatBytes, useDocuments } from '../../features/documents/api.js';
+import { FILTER_LABEL, formatBytes, useDocuments, useReaderCapability } from '../../features/documents/api.js';
 import ledger from '../../features/ledger/Ledger.module.css';
 import styles from '../../features/documents/Documents.module.css';
 
@@ -22,16 +20,6 @@ const SORTS = [
   { value: 'sizeBytes:asc', label: 'Smallest first' },
 ];
 const TYPE_LABEL = { 'application/pdf': 'PDF', 'image/jpeg': 'JPEG', 'image/png': 'PNG', 'image/webp': 'WebP', 'image/gif': 'GIF', 'image/heic': 'HEIC' };
-
-/** Whether the server can read documents right now (GET /ai/capabilities) — stated, never assumed. */
-function useReaderCapability() {
-  return useQuery({
-    queryKey: ['ai-capabilities'],
-    queryFn: async ({ signal }) => (await api.get('/ai/capabilities', { signal })).data,
-    staleTime: 5 * 60_000,
-    select: (data) => data?.capabilities?.find((c) => c.id === 'document_extraction') ?? null,
-  });
-}
 
 
 /**

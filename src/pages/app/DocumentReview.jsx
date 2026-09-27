@@ -14,7 +14,7 @@ import { useAccounts, useCategories, useCompany } from '../../features/ledger/ap
 import { TransactionForm } from '../../features/ledger/TransactionForm.jsx';
 import { InvoiceForm } from '../../features/invoices/InvoiceForm.jsx';
 import {
-  FAILURE_LABEL, formatBytes, useConfirmAsInvoice, useConfirmAsTransaction, useDeleteDocument, useDocument, useExtractDocument,
+  FAILURE_LABEL, formatBytes, useConfirmAsInvoice, useConfirmAsTransaction, useDeleteDocument, useDocument, useExtractDocument, useReaderCapability,
 } from '../../features/documents/api.js';
 import { DocumentStatus, ExtractedFields, FilePreview, invoicePrefill, transactionPrefill } from '../../features/documents/Review.jsx';
 import styles from '../../features/documents/Documents.module.css';
@@ -76,6 +76,7 @@ export default function DocumentReview() {
   const company = useCompany();
   const accounts = useAccounts();
   const categories = useCategories();
+  const reader = useReaderCapability();
   const extract = useExtractDocument();
   const remove = useDeleteDocument();
   const asTransaction = useConfirmAsTransaction(documentId);
@@ -107,7 +108,8 @@ export default function DocumentReview() {
   const name = doc.originalFilename ?? 'Untitled document';
   const open = !doc.confirmation && doc.status !== 'processing';
   const hasPostingAccount = accounts.data?.some((a) => a.acceptsTransactions);
-  const canReread = !doc.confirmation && doc.status !== 'processing' && capability && !capability.degraded;
+  // Whether the reader works now — not how this document was read (it may predate the reader).
+  const canReread = !doc.confirmation && doc.status !== 'processing' && Boolean(reader.data?.available);
 
   const reread = () => extract.mutate(doc.id, {
     onSuccess: () => toast.success('Reading again', 'The page updates when it is done.'),
